@@ -1,0 +1,51 @@
+---
+- name: install tools
+  yum: name={{item}} state=installed
+  with_items:
+    - python-httplib2
+
+- name: install nginx
+  yum: name=nginx state=installed
+
+- name: get active sites
+  shell: ls -1 /etc/nginx/conf.d 
+  changed_
+  when: "active.stdout_lines !=  sites.keys"
+  register: active
+  tags: [ 'configure' ]
+
+- debug:
+    msg: "{{ active.stdout_lines }}"
+
+- name: de-activate sites
+  file: path=/etc/nginx/conf.d/{{ item }} state=absent
+  with_items:
+    - "{{ active.stdout_lines }}"
+  when: item not in sites
+  notify: restart nginx
+
+- name: configure nginx sites
+  template: src=nginx.conf.j2 dest=/etc/nginx/conf.d/{{ item.key }}.conf mode=0644
+  with_dict: "{{ sites }}"
+  notify: restart nginx
+
+# - name: de-activate default nginx site
+#   file: path=/etc/nginx/sites-enabled/virtual.conf state=absent
+#   notify: restart nginx
+
+# - name: activate nginx sites
+#   file: src=/etc/nginx/sites-available/"{{ item.key }}" dest=/etc/nginx/sites-enabled/"{{ item.key }}" state=link
+#   with_dict: "{‌{sites}}"
+#   notify: restart nginx
+
+- name: ensure nginx started
+  service: name=nginx state=started enabled=yes
+
+- name: copy template acl.json
+  template: src=acl.json.j2 dest=/etc/consul/acl.json mode=0644
+  tags: [ 'file' ]
+
+- name: copy file config.json
+  copy: src=config.json dest=/etc/consul/config.json mode=0644
+  tags: [ 'file' ]
+

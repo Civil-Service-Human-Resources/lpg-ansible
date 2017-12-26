@@ -1,0 +1,25 @@
+---
+- name: install tools
+  yum: name={{item}} state=installed
+  with_items:
+    - mysql-connector-python
+    - MySQL-python27
+
+- name: install mysql-server
+  yum: name=mysql-server state=installed
+
+# - name: ensure mysql listening on all ports
+#   lineinfile: dest=/etc/my.cnf regexp=^bind-address
+#               line="bind-address = {{ ansible_eth0.ipv4.address }}"
+#   notify: restart mysql
+
+- name: ensure mysql started
+  service: name=mysqld state=started enabled=yes
+
+- name: create database
+  mysql_db: name={{ db_name }} state=present
+
+- name: create user
+  mysql_user: name={{ db_user_name }} password={{ db_user_pass }} priv={{ db_name }}.*:ALL
+              host="127.0.0.1" state=present
+  tags: [ 'create_user' ]

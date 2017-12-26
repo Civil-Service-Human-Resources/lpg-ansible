@@ -1,0 +1,20 @@
+---
+- name: Check token exits
+  stat:
+    path: environments/{{ env }}/group_vars/tokens/standardToken.yml
+  register: token
+
+- name: copy template token.sh
+  template: src=token.sh.j2 dest=/tmp/token.sh mode=0744
+  when: not token.stat.exists
+
+- name: generate standardToken
+  command: /tmp/token.sh standard
+  when: not token.stat.exists
+
+- name: generate secureToken
+  command: /tmp/token.sh secure
+  when: not token.stat.exists
+
+- name: delete token.sh
+  file: path='/tmp/token.sh' state=absent

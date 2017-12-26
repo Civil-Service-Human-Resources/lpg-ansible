@@ -1,0 +1,32 @@
+---
+- name: Install unzip
+  apt:
+    name: unzip
+    state: present
+
+- name: Install Consul
+  shell: |
+    version="{{ consulVersion }}"
+    wget https://releases.hashicorp.com/consul/{{ consulVersion }}/consul_{{ consulVersion }}_linux_amd64.zip -O /opt/consul/bin/consul_{{ consulVersion }}_linux_amd64.zip
+    cd /opt/consul/bin/
+    unzip /opt/consul/bin/consul_{{ consulVersion }}_linux_amd64.zip
+    rm /opt/consul/bin/consul_{{ consulVersion }}_linux_amd64.zip
+    ln -s /opt/consul/bin/consul /opt/consul/bin/consul_{{ consulVersion }}
+  args:
+    creates: /opt/consul/bin/consul_{{ consulVersion }}
+
+- name: copy acl.json
+  template: src=acl.json.j2 dest=/opt/consul/config/acl.json mode=0440
+  notify: reload consul
+
+- name: copy config.json
+  template: src=config.json.j2 dest=/opt/consul/config/config.json mode=0440
+  notify: reload consul
+
+- name: copy consul.service
+  copy: src=consul.service dest=/etc/systemd/system/consul.service mode=0640
+  notify: reload consul
+
+- name: Ensure consul started
+  service: name=consul state=started
+

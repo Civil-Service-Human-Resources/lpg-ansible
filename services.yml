@@ -1,0 +1,14 @@
+---
+- hosts: services
+  become: true
+  gather_facts: false
+  roles:
+    - consul
+  vars:
+    consulVersion: "1.0.2"
+#    - vault
+#    - mongodb
+#    - elasticsearch
+#    - postgresql
+
+

@@ -1,0 +1,23 @@
+---
+- name: install web components
+  yum: name={{item}} state=latest
+  with_items:
+    - python-pip
+    - python-virtualenv
+  #  - python-mysqldb
+
+- name: copy demo app source
+  copy: src=demo/app/ dest=/var/www/html/demo mode=0755 force=no
+  notify: restart httpd
+
+- name: copy template
+  template: src=demo.wsgi.j2 dest=/var/www/html/demo/demo.wsgi mode=0755
+  notify: restart httpd
+
+- name: copy apache virtual host config
+  copy: src=demo/demo.conf dest=/etc/httpd/conf.d/demo.conf mode=0755
+  notify: restart httpd
+
+- name: setup python virtualenv
+  pip: requirements=/var/www/html/demo/requirements.txt virtualenv=/var/www/html/demo/.venv 
+  notify: restart httpd
