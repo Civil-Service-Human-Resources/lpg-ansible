@@ -1,0 +1,13 @@
+[Unit]
+Description=vault agent
+Requires=network-online.target
+After=network-online.target
+
+[Service]
+EnvironmentFile=-/etc/sysconfig/vault
+Restart=on-failure
+ExecStart=/opt/vault/bin/vault agent $VAULT_FLAGS -config-dir=/opt/vault/config/ -dev
+ExecReload=/bin/kill -HUP $MAINPID
+
+[Install]
+WantedBy=multi-user.target

@@ -3,8 +3,8 @@
 `requirements` to run ansible
 
  * ansible : ` brew install ansible`
- * pem file for ansible to ssh into hosts : ` we need a lastpass or something similar to share these type of things`  
- * ansible vault password : ` we need a lastpass or something similar to share these type of things`
+ * pem file for ansible to ssh into hosts : ` need lastpass or something similar to share secrets`  
+ * ansible vault password : ` need lastpass or something similar to share secrets`
 
 add the pem to the root directory
 

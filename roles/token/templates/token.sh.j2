@@ -11,10 +11,11 @@ data="$(cat <<EOF
 EOF
 )"
 
+echo $data
+
 newToken=`curl http://{{ groups.services [0] }}:8500/v1/acl/create \
   -H 'X-Consul-Token: {{ masterToken }}' \
   -X PUT --data "$data" | jq --raw-output '.ID'`
-
 
 [[ $newToken =~ ^(.*-){4}.*$ ]] || exit 2
 
