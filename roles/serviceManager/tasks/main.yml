@@ -37,6 +37,8 @@
         consulServer: "{{ groups.services [0] }}"
         tokenName: "{{ tokenName }}"
         VIRTUAL_HOST: www.123.com
+        NewVarable: blahBlah
+
   become: yes
   tags: httpd
 
