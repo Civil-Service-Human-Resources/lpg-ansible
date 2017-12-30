@@ -7,16 +7,17 @@ jobs:
       - run:
           name: Install Ansible
           command: |
-            sudo apt-get install software-properties-common
-            sudo apt-add-repository ppa:ansible/ansible -y
-            sudo apt-get update
-            sudo apt-get install ansible
+#            sudo apt-get install software-properties-common
+#            sudo apt-add-repository ppa:ansible/ansible -y
+#            sudo apt-get update
+#            sudo apt-get install ansible
       - run:
           name: Run ansible-playbook site.yml -i environments/dev
           command: |
             echo $lpgKey.pem > lpgKey.pem
             echo $vaultpass > vault.yml
             cat lpgKey.pem
+            chmod 400 lpgKey.pem
             ssh -i lpgKey.pem lpg@devlpg-01.uksouth.cloudapp.azure.com
             ansible-playbook site.yml -i environments/dev
 
