@@ -11,10 +11,9 @@ jobs:
       - run:
           name: Run ansible-playbook site.yml -i environments/dev
           command: |
-            echo $lpgKey.pem > lpgKey.pem
             echo $vaultpass > vault.yml
-            cat lpgKey.pem
-            chmod 400 lpgKey.pem
+            ansible-vault decrypt lpg
+            chmod 400 lpg
             ansible-playbook site.yml -i environments/dev
 
 workflows:
