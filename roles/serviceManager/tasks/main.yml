@@ -1,7 +1,7 @@
 ---
 - name: Include variables
   include_vars:
-    dir: '../../../environments/{{ env }}/group_vars/tokens/'
+    dir: '/home/circleci/project/lpg/environments/{{ env }}/group_vars/tokens/'
   tags: httpd
 
 - name: Run httpd container
