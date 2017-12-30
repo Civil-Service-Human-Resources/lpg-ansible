@@ -12,7 +12,6 @@ jobs:
           name: Run ansible-playbook site.yml -i environments/dev
           command: |
             echo $vaultpass > vault.yml
-            chmod 400 lpg
             ansible-playbook site.yml -i environments/dev
 
 workflows:
