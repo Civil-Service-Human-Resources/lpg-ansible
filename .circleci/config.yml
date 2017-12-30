@@ -14,10 +14,11 @@ jobs:
       - run:
           name: Run ansible-playbook site.yml -i environments/dev
           command: |
+            ls -la
             echo $lpgkey.pem > lpgkey.pem
             echo $vaultpass > vault.yml
             cat vault.yml
-            ansible-playbook site.yml -i environments/dev
+#            ansible-playbook site.yml -i environments/dev
 
 workflows:
   version: 2
