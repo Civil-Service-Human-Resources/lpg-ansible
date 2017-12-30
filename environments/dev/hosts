@@ -1,14 +1,14 @@
 [services]
-devlpg-01.uksouth.cloudapp.azure.com ansible_ssh_private_key_file=lpg ansible_user=lpg
+devlpg-01.uksouth.cloudapp.azure.com ansible_user=lpg
 
 [standard]
-devlpg-02.uksouth.cloudapp.azure.com ansible_ssh_private_key_file=lpg ansible_user=lpg
+devlpg-02.uksouth.cloudapp.azure.com ansible_user=lpg
 
 [secure]
-devlpg-03.uksouth.cloudapp.azure.com ansible_ssh_private_key_file=lpg ansible_user=lpg
+devlpg-03.uksouth.cloudapp.azure.com ansible_user=lpg
 
 [nonmanaged]
-devlpg-04.uksouth.cloudapp.azure.com ansible_ssh_private_key_file=lpg ansible_user=lpg
+devlpg-04.uksouth.cloudapp.azure.com ansible_user=lpg
 
 [localhost]
 localhost ansible_connection=local
