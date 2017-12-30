@@ -11,6 +11,7 @@ jobs:
 #            sudo apt-add-repository ppa:ansible/ansible -y
 #            sudo apt-get update
 #            sudo apt-get install ansible
+             ls
       - run:
           name: Run ansible-playbook site.yml -i environments/dev
           command: |
