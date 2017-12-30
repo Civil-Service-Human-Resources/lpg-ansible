@@ -1,14 +1,14 @@
 [services]
-51.140.33.36 ansible_ssh_private_key_file=alphalpg.pem ansible_user=lpg
+devlpg-01.uksouth.cloudapp.azure.com ansible_ssh_private_key_file=lpgKey.pem ansible_user=lpg
 
 [standard]
-51.140.33.36 ansible_ssh_private_key_file=alphalpg.pem ansible_user=lpg
+devlpg-02.uksouth.cloudapp.azure.com ansible_ssh_private_key_file=lpgKey.pem ansible_user=lpg
 
 [secure]
-51.140.33.36 ansible_ssh_private_key_file=alphalpg.pem ansible_user=lpg
+devlpg-03.uksouth.cloudapp.azure.com ansible_ssh_private_key_file=lpgKey.pem ansible_user=lpg
 
 [nonmanaged]
-51.140.33.36 ansible_ssh_private_key_file=alphalpg.pem ansible_user=lpg
+devlpg-04.uksouth.cloudapp.azure.com ansible_ssh_private_key_file=lpgKey.pem ansible_user=lpg
 
 [localhost]
 localhost ansible_connection=local

@@ -1,0 +1,10 @@
+---
+- hosts: nonmanaged
+  become: true
+  gather_facts: false
+  roles:
+    - docker
+
+
+
+

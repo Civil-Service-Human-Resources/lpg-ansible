@@ -6,7 +6,7 @@ data="$(cat <<EOF
 {
         "Name": "${token}Token",
         "Type": "client",
-        "Rules": "key \"${token}\" {policy = \"write\"}"
+        "Rules": "key \"${token}/\" {policy = \"write\"}"
 }
 EOF
 )"

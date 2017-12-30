@@ -35,7 +35,6 @@
   shell: |
     cd /opt/consul/bin/
     [[ `find . -name "*.zip"` ]] && rm `find . -name "*.zip"`
-    version="{{ consulVersion }}"
     wget https://releases.hashicorp.com/consul/{{ consulVersion }}/consul_{{ consulVersion }}_linux_amd64.zip -O /opt/consul/bin/consul_{{ consulVersion }}_linux_amd64.zip
     unzip -o /opt/consul/bin/consul_{{ consulVersion }}_linux_amd64.zip
     chmod +x consul

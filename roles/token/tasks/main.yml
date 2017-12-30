@@ -12,11 +12,13 @@
 
 - name: generate standardToken
   command: /tmp/token.sh standard
+  register: standardToken
   when: not token.stat.exists
   tags: token
 
 - name: generate secureToken
   command: /tmp/token.sh secure
+  register: secureToken
   when: not token.stat.exists
   tags: token
 
