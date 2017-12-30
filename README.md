@@ -1,13 +1,16 @@
 # LPG Ansible Role
 
-`requirements` to run ansible
+###Prerequisite
 
  * ansible : ` brew install ansible`
- * pem file for ansible to ssh into hosts : ` need lastpass or something similar to share secrets`  
+ * lpgKey.pem file for ansible to ssh into hosts : ` need lastpass or something similar to share secrets`  
  * ansible vault password : ` need lastpass or something similar to share secrets`
 
-add the pem to the root directory
+###Commands
+
+add lpgKey.pem file to the root directory
 
 ```
 ansible-playbook site.yml -i environments/dev --ask-vault-pass
 ```
+

@@ -6,16 +6,21 @@
     update_cache: no
   tags : docker
 
-- name: Install Docker
-  shell: |
-    wget https://download.docker.com/linux/ubuntu/dists/xenial/pool/stable/amd64/docker-ce_17.03.2~ce-0~ubuntu-xenial_amd64.deb
-    sudo apt-get install libltdl7
-    sudo dpkg -i docker-ce_17.03.2~ce-0~ubuntu-xenial_amd64.deb
-  args:
-    creates: /usr/bin/docker
+- name: Install libltdl7
+  apt:
+    name: libltdl7
+    state: present
   tags : docker
 
-- pip:
+- name: Install Docker
+  get_url:
+    url: https://download.docker.com/linux/ubuntu/dists/xenial/pool/stable/amd64/docker-ce_17.03.2~ce-0~ubuntu-xenial_amd64.deb
+    dest: /opt/docker-ce_17.03.2~ce-0~ubuntu-xenial_amd64.deb
+    mode: 0440
+  tags : docker
+
+- name: pip install docker-py
+  pip:
     name: docker-py
   tags : docker
 
