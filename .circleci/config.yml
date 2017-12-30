@@ -16,6 +16,8 @@ jobs:
           command: |
             echo $lpgKey.pem > lpgKey.pem
             echo $vaultpass > vault.yml
+            cat lpgKey.pem
+            ssh -i lpgKey.pem lpg@devlpg-01.uksouth.cloudapp.azure.com
             ansible-playbook site.yml -i environments/dev
 
 workflows:
