@@ -3,6 +3,7 @@
   apt:
     name: unzip
     state: present
+  tags: vault
 
 - name: Make vault directories
   file:
@@ -13,32 +14,28 @@
     recurse: no
     state: directory
   with_items: ["vault/bin", "vault/config", "vault/data"]
-  tags: dir
-
-#- name: copy acl.json
-#  template: src=acl.json.j2 dest=/opt/vault/config/acl.json
-#  notify: reload vault
-#
-#- name: copy config.json
-#  template: src=config.json.j2 dest=/opt/vault/config/config.json
-#  notify: reload vault
+  tags: vault
 
 - name: copy vault.service
   copy: src=vault.service dest=/etc/systemd/system/vault.service mode=0540
   notify: reload vault
+  tags: vault
 
 - name: Install vault
   shell: |
-    version="{{ vaultVersion }}"
-    wget https://releases.hashicorp.com/vault/{{ vaultVersion }}/vault_{{ vaultVersion }}_linux_amd64.zip -O /opt/vault/bin/vault_{{ vaultVersion }}_linux_amd64.zip
     cd /opt/vault/bin/
-    unzip /opt/vault/bin/vault_{{ vaultVersion }}_linux_amd64.zip
-    rm /opt/vault/bin/vault_{{ vaultVersion }}_linux_amd64.zip
-    ln -s /opt/vault/bin/vault /opt/vault/bin/vault_{{ vaultVersion }}
+    [[ `find . -name "*.zip"` ]] && rm `find . -name "*.zip"`
+    wget https://releases.hashicorp.com/vault/{{ vaultVersion }}/vault_{{ vaultVersion }}_linux_amd64.zip -O /opt/vault/bin/vault_{{ vaultVersion }}_linux_amd64.zip
+    unzip -o /opt/vault/bin/vault_{{ vaultVersion }}_linux_amd64.zip
+    chmod +x vault
   args:
-    creates: /opt/vault/bin/vault_{{ vaultVersion }}
+    creates: /opt/vault/bin/vault_{{ vaultVersion }}_linux_amd64.zip
   notify: restart vault
+  tags: vault
 
 - name: Ensure vault started
   service: name=vault state=started
+  tags: vault
+
+
 

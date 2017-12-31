@@ -4,7 +4,7 @@
   gather_facts: false
   roles:
     - consul
-    #- vault
+    - vault
     - postgresql
     - elasticsearch
     - mongodb
