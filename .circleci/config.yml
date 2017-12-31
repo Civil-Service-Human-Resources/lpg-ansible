@@ -11,7 +11,7 @@ jobs:
       - run:
           name: Run ansible-playbook site.yml -i environments/dev
           command: |
-            cat .ssh/config
+            ls -la  ~/.ssh/
             echo $vaultpass > vault.yml
             ansible-playbook site.yml -i environments/dev
 
