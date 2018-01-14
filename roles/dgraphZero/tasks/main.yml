@@ -1,0 +1,21 @@
+---
+
+- name: dgraphZero
+  docker_container:
+    name: dgraphZero
+    image: dgraph/dgraph
+    state: started
+    recreate: no
+    command: "{{ zeroCommand }}"
+    published_ports:
+      - 5080:5080
+      - 5081:5081
+      - 6080:6080
+    volumes:
+      - /datadisk/dgraph:/dgraph
+      - /etc/hosts.ansible:/etc/hosts
+  become: yes
+  tags: dgraphZero
+
+
+

@@ -9,6 +9,7 @@
     published_ports:
       - 80:80
   become: yes
+  tags : proxy
 
 
 #https://github.com/jwilder/nginx-proxy

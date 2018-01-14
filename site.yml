@@ -3,3 +3,4 @@
 - import_playbook: token.yml
 - import_playbook: serviceManager.yml
 - import_playbook: nonManaged.yml
+- import_playbook: dgraph.yml

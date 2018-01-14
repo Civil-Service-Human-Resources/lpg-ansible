@@ -1,0 +1,70 @@
+---
+
+- hosts: dgraph
+  become: true
+  gather_facts: true
+  roles:
+    - docker
+    - hosts
+    - dataDisk
+
+#### dgraph Zero
+
+- hosts: dgraph[0]
+  name: bob
+  become: true
+  gather_facts: false
+  roles:
+    - dgraphZero
+  vars:
+    zeroCommand: "dgraph zero -o -2000 --my=dgraph-01:5080 --replicas 3 --idx 1"
+
+- hosts: dgraph[1]
+  become: true
+  gather_facts: false
+  roles:
+    - dgraphZero
+  vars:
+    zeroCommand: "dgraph zero -o -1999 --my=dgraph-02:5081 --replicas 3 --peer dgraph-01:5080 --idx 2"
+
+- hosts: dgraph[2]
+  become: true
+  gather_facts: false
+  roles:
+    - dgraphZero
+  vars:
+    zeroCommand: "dgraph zero -o -1999 --my=dgraph-03:5081 --replicas 3 --peer dgraph-01:5080 --idx 3"
+
+#### dgraph Server
+
+- hosts: dgraph[0]
+  become: true
+  gather_facts: false
+  roles:
+    - dgraphServer
+  vars:
+    serverCommand: "dgraph server --my=dgraph-01:7080 --memory_mb=1048 --zero=dgraph-01:5080"
+    port: "7080"
+
+- hosts: dgraph[1]
+  become: true
+  gather_facts: false
+  roles:
+    - dgraphServer
+  vars:
+    serverCommand: "dgraph server --my=dgraph-02:7081 --memory_mb=1048 --zero=dgraph-01:5080 -o 1"
+    port: "7081"
+
+- hosts: dgraph[2]
+  become: true
+  gather_facts: false
+  roles:
+    - dgraphServer
+  vars:
+    serverCommand: "dgraph server --my=dgraph-03:7082 --memory_mb=1048 --zero=dgraph-01:5080 -o 2"
+    port: "7082"
+
+
+
+
+

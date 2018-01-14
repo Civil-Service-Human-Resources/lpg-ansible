@@ -1,17 +1,17 @@
 ---
 - name: Include variables
   include_vars:
-    dir: '/home/circleci/project/environments/{{ env }}/group_vars/tokens/'
+    dir: '../../../environments/{{ env }}/group_vars/tokens/'
   tags: httpd
 
-- name: Run httpd container
+- name: Run learner ui container
   docker_container:
-    name: httpd
-    image: httpd
+    name: lpg-learner-ui
+    image: superroot/lpg-learner-ui
     state: started
     recreate: no
-    exposed_ports:
-      - 80
+#    exposed_ports:
+#      - 3001
     volumes:
       - /tmp:/usr/local/apache2/htdocs/
     env:
@@ -22,14 +22,14 @@
   become: yes
   tags: httpd
 
-- name: Run httpd container 2
+- name: Run learner ui container 2
   docker_container:
-    name: httpd2
-    image: httpd
+    name: lpg-learner-ui-2
+    image: superroot/lpg-learner-ui
     state: started
     recreate: no
-    exposed_ports:
-      - 80
+#    exposed_ports:
+#      - 3001
     volumes:
       - /tmp/2:/usr/local/apache2/htdocs/
     env:
@@ -37,7 +37,6 @@
         consulServer: "{{ groups.services [0] }}"
         tokenName: "{{ tokenName }}"
         VIRTUAL_HOST: www.123.com
-        NewVarable: blahBlah
 
   become: yes
   tags: httpd
