@@ -1,14 +1,14 @@
-[consul]
-ec2-user@ec2-52-212-229-157.eu-west-1.compute.amazonaws.com ansible_ssh_private_key_file=awsmarch2017.pem ansible_user=ec2_user
+[services]
+testlpg-01.uksouth.cloudapp.azure.com ansible_user=lpg
 
 [standard]
-52.213.108.234 ansible_ssh_private_key_file=awsmarch2017.pem ansible_user=ubuntu
+testlpg-02.uksouth.cloudapp.azure.com ansible_user=lpg
 
 [secure]
-52.213.108.234 ansible_ssh_private_key_file=awsmarch2017.pem ansible_user=ubuntu
+testlpg-03.uksouth.cloudapp.azure.com ansible_user=lpg
 
-[services]
-52.213.108.234 ansible_ssh_private_key_file=awsmarch2017.pem ansible_user=ubuntu
+[nonmanaged]
+testlpg-04.uksouth.cloudapp.azure.com ansible_user=lpg
 
 [localhost]
 localhost ansible_connection=local

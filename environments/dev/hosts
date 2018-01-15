@@ -1,14 +1,18 @@
 [services]
-devlpg-01.uksouth.cloudapp.azure.com ansible_user=lpg
-
-[standard]
-devlpg-02.uksouth.cloudapp.azure.com ansible_user=lpg
-
-[secure]
-devlpg-03.uksouth.cloudapp.azure.com ansible_user=lpg
+devlpgdefault-01.uksouth.cloudapp.azure.com ansible_user=lpg
 
 [nonmanaged]
-devlpg-04.uksouth.cloudapp.azure.com ansible_user=lpg
+devlpgdefault-02.uksouth.cloudapp.azure.com ansible_user=lpg
+
+[standard]
+devlpgservicemanager-01.uksouth.cloudapp.azure.com ansible_user=lpg
+
+[secure]
+devlpgservicemanager-02.uksouth.cloudapp.azure.com ansible_user=lpg
 
 [localhost]
 localhost ansible_connection=local
+
+[dgraph]
+devlpgdgraph-0[1:3].uksouth.cloudapp.azure.com ansible_user=lpg
+

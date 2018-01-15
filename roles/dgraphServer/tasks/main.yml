@@ -8,8 +8,8 @@
     recreate: no
     command: "{{ serverCommand }}"
     published_ports:
-      - "{{port}}:{{port}}"
-      - 8080:8080
+      - "{{ port1 }}"
+      - "{{ port2 }}"
     volumes:
       - /datadisk/dgraph:/dgraph
       - /etc/hosts.ansible:/etc/hosts
