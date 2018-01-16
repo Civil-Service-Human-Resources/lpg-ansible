@@ -7,6 +7,7 @@
     - docker
     - hosts
     - dataDisk
+    - filebeat
 
 #### dgraph Zero
 

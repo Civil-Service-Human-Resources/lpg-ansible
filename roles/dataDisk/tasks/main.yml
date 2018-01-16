@@ -1,6 +1,6 @@
 ---
 
-- name: create data disk
+- name: create /datadisk directory
   file:
     path: /datadisk
     owner: root

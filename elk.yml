@@ -1,0 +1,7 @@
+---
+- hosts: nonmanaged
+  become: true
+  gather_facts: no
+  roles:
+    - dataDisk
+    - elk

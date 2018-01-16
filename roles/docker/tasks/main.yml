@@ -25,9 +25,12 @@
     state: present
   tags : docker
 
-- name: pip install docker-py
+- name: pip install docker-py and docker-compose
   pip:
-    name: docker-py
+    name: "{{ item }}"
+  with_items:
+    - docker-py
+    - docker-compose
   tags : docker
 
 - name: Ensure docker started

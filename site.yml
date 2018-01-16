@@ -4,3 +4,4 @@
 - import_playbook: serviceManager.yml
 - import_playbook: nonManaged.yml
 - import_playbook: dgraph.yml
+- import_playbook: elk.yml
